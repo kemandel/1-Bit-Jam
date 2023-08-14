@@ -4,9 +4,19 @@ using UnityEngine;
 
 public class LevelManager : MonoBehaviour
 {
+    [HideInInspector]
+    public float lineX;
+
+    public Transform hitBar;
+
+    private void Awake() 
+    {
+        lineX = .5f;
+    }
+
     // Update is called once per frame
     void Update()
     {
-        FindObjectOfType<ColorSwap>().lineX = Input.mousePosition.x / Screen.width;
+        lineX = Input.mousePosition.x / Screen.width;
     }
 }

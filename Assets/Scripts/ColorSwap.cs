@@ -10,20 +10,16 @@ public class ColorSwap : MonoBehaviour
     public Color colorA;
     public Color colorB;
 
-    [HideInInspector]
-    public float lineX;
-
     private void Start() 
     {
         postProcessing = new Material(Shader.Find(SHADER_NAME));
         postProcessing.SetVector("_Color_A", colorA);
         postProcessing.SetVector("_Color_B", colorB);
-        lineX = .5f;
     }
 
     private void OnRenderImage(RenderTexture src, RenderTexture dest) 
     {
-        postProcessing.SetFloat("_Swap_Line_X", lineX);
+        postProcessing.SetFloat("_Swap_Line_X", FindObjectOfType<LevelManager>().lineX);
         Graphics.Blit(src, dest, postProcessing);
     }
 }
