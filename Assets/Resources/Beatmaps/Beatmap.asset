@@ -28,4 +28,32 @@ MonoBehaviour:
     time: 2
   - position: 6
     time: 2.5
-  song: {fileID: 8300000, guid: f9db93e707ec3e840bf403c30d16ea5f, type: 3}
+  - position: 1
+    time: 3
+  - position: 1
+    time: 3.5
+  - position: 2
+    time: 4
+  - position: 6
+    time: 4.5
+  - position: 6
+    time: 5
+  - position: 5
+    time: 5.5
+  - position: 2
+    time: 6
+  - position: 2
+    time: 6.5
+  - position: 3
+    time: 7
+  - position: 5
+    time: 7.5
+  - position: 5
+    time: 8
+  - position: 4
+    time: 8.5
+  - position: 3
+    time: 9
+  - position: 4
+    time: 9
+  song: {fileID: 8300000, guid: 44727246b9551844aa88d6f7b962e904, type: 3}

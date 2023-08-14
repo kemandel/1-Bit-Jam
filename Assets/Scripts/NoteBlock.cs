@@ -8,8 +8,8 @@ public class NoteBlock : MonoBehaviour
     /// Time it takes for the note to fall
     /// </summary>
     public float fallTime;
-
-    private bool player1;
+    public Sprite spriteDay;
+    public Sprite spriteNight;
 
     private void Start() 
     {
@@ -18,10 +18,12 @@ public class NoteBlock : MonoBehaviour
 
     private void Update() 
     {
-        // Choose which player can hit the note
-        if (transform.position.x < FindObjectOfType<LevelManager>().lineX)
-            player1 = true;
-        else player1 = false;
+        Sprite newSprite = spriteNight;
+        if (transform.position.x <= FindObjectOfType<LevelManager>().lineX)
+        {
+            newSprite = spriteDay;
+        }
+        FindObjectOfType<SpriteRenderer>().sprite = newSprite;
     }
 
     private IEnumerator FallCoroutine()

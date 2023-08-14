@@ -21,18 +21,30 @@ public class SongPlayer : MonoBehaviour
         int i = 0;
         while (i < map.beatmap.Length)
         {
-            SpawnNote(map.beatmap[i].position, map.fallTime);
+            SpawnNote(map.beatmap[i], map.fallTime);
             if (i + 1 < map.beatmap.Length)
                 yield return new WaitForSeconds(map.beatmap[i+1].time - map.beatmap[i].time);
             i++;
         }
     }
 
-    private void SpawnNote(int posX, float fallTime)
+    private void SpawnNote(Note note, float fallTime)
     {
-        GameObject note = (GameObject)Resources.Load("Prefabs/NoteBlock");
-        note.transform.position = new Vector3(SPAWN_SPACE * posX - SPAWN_SPACE * (4 - .5f), NOTE_HEIGHT);
-        note.GetComponent<NoteBlock>().fallTime = fallTime;
-        Instantiate(note);
+        Vector3 startingPosition = new Vector3(SPAWN_SPACE * note.position - SPAWN_SPACE * (4 - .5f), NOTE_HEIGHT);
+
+        if (note.slider)
+        {
+            GameObject slider = (GameObject)Resources.Load("Prefabs/SliderBlock");
+            float lengthPerSecond = (startingPosition.y - FindObjectOfType<LevelManager>().hitBar.position.y) / fallTime;
+            float sliderLength = lengthPerSecond * note.sliderDuration;
+            slider.transform.position = new Vector3(startingPosition.x, startingPosition.y + sliderLength / 2);
+        }
+        else
+        {
+            GameObject newNote = (GameObject)Resources.Load("Prefabs/NoteBlock");
+            newNote.transform.position = startingPosition;
+            newNote.GetComponent<NoteBlock>().fallTime = fallTime;
+            Instantiate(newNote);
+        }
     }
 }
