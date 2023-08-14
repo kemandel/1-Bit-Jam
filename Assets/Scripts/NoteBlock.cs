@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Note : MonoBehaviour
+public class NoteBlock : MonoBehaviour
 {
     /// <summary>
     /// Time it takes for the note to fall

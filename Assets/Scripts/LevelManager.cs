@@ -18,5 +18,10 @@ public class LevelManager : MonoBehaviour
     void Update()
     {
         lineX = Input.mousePosition.x / Screen.width;
+
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            FindObjectOfType<SongPlayer>().PlaySong((BeatMap)Resources.Load("Beatmaps/Beatmap"));
+        }
     }
 }
