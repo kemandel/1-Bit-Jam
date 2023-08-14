@@ -21,7 +21,7 @@ public class LevelManager : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            FindObjectOfType<SongPlayer>().PlaySong((BeatMap)Resources.Load("Beatmaps/Beatmap"));
+            GetComponent<SongPlayer>().PlaySong((BeatMap)Resources.Load("Beatmaps/Beatmap"));
         }
     }
 }

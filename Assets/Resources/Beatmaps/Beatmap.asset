@@ -12,11 +12,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b060253348b1834b8b04ee549e4bfd7, type: 3}
   m_Name: Beatmap
   m_EditorClassIdentifier: 
-  fallSpeed: 5
+  fallTime: 3
   beatmap:
   - position: 0
     time: 0
+  - position: 0
+    time: 0
+  - position: 0
+    time: 0.5
   - position: 1
-    time: 0.1
-  - position: 2
-    time: 0.2
+    time: 1
+  - position: 7
+    time: 1.5
+  - position: 7
+    time: 2
+  - position: 6
+    time: 2.5
+  song: {fileID: 8300000, guid: f9db93e707ec3e840bf403c30d16ea5f, type: 3}

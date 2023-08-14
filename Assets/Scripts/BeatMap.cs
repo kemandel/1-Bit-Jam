@@ -5,7 +5,7 @@ using UnityEngine;
 [CreateAssetMenu]
 public class BeatMap : ScriptableObject
 {
-    public float fallSpeed;
+    public float fallTime;
     public Note[] beatmap;
     public AudioClip song;
 }
