@@ -15,8 +15,12 @@ public class NoteBlock : MonoBehaviour
     public Sprite altSpriteDay;
     public Sprite altSpriteNight;
 
-    private SpriteRenderer sRenderer;
     public Coroutine activeCoroutine = null;
+    [HideInInspector]
+    public bool day;
+
+    private SpriteRenderer sRenderer;
+
 
     public virtual void Start() 
     {
@@ -26,10 +30,11 @@ public class NoteBlock : MonoBehaviour
 
     public virtual void Update() 
     {
+        day = Camera.main.WorldToScreenPoint(transform.position).x / Screen.width <= FindObjectOfType<LevelManager>().lineX;
         if (sRenderer.sprite == spriteDay || sRenderer.sprite == spriteNight)
         {
             sRenderer.sprite = spriteNight;
-            if (Camera.main.WorldToScreenPoint(transform.position).x / Screen.width <= FindObjectOfType<LevelManager>().lineX)
+            if (day)
             {
                 sRenderer.sprite = spriteDay;
             }
@@ -54,6 +59,8 @@ public class NoteBlock : MonoBehaviour
     public virtual void Miss()
     {
         Debug.Log("Miss");
+
+        FindObjectOfType<LevelManager>().ComboBreak(day ? 1 : 0);
     }
 
     public virtual void GoodHit()
@@ -61,19 +68,23 @@ public class NoteBlock : MonoBehaviour
         Debug.Log("Good");
         StopCoroutine(activeCoroutine);
         StartCoroutine(FadeCoroutine(FADE_DURATION, sRenderer));
+        
+        FindObjectOfType<LevelManager>().AddScore(day ? 1 : 0, LevelManager.SCORE_GOOD);
     }
 
     public virtual void PerfectHit()
     {
         Debug.Log("Perfect");
         sRenderer.sprite = altSpriteNight;
-        if (Camera.main.WorldToScreenPoint(transform.position).x / Screen.width <= FindObjectOfType<LevelManager>().lineX)
+        if (day)
         {
             sRenderer.sprite = altSpriteDay;
         }
 
         StopCoroutine(activeCoroutine);
         StartCoroutine(FadeCoroutine(FADE_DURATION, sRenderer));
+
+        FindObjectOfType<LevelManager>().AddScore(day ? 1 : 0, LevelManager.SCORE_PERFECT);
     }
 
     public virtual IEnumerator FadeCoroutine(float fadeDuration, SpriteRenderer sRenderer)

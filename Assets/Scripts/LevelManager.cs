@@ -4,8 +4,21 @@ using UnityEngine;
 
 public class LevelManager : MonoBehaviour
 {
+    public const int SCORE_GOOD = 50;
+    public const int SCORE_PERFECT = 100;
+    public const int COMBO_DIVIDER = 100;
+    public const int SLIDER_MULTI = 2;
+
     [HideInInspector]
     public float lineX;
+    [HideInInspector]
+    public int dayScore;
+    [HideInInspector]
+    public int nightScore;
+    [HideInInspector]
+    public int dayCombo;
+    [HideInInspector]
+    public int nightCombo;
 
     public Transform hitBar;
 
@@ -23,5 +36,36 @@ public class LevelManager : MonoBehaviour
         {
             GetComponent<SongPlayer>().PlaySong((BeatMap)Resources.Load("Beatmaps/Beatmap"));
         }
+    }
+
+    /// <summary>
+    /// Adds a set score to the player. (0 for player 1 or "day", 1 for player 2 or "night")
+    /// </summary>
+    /// <param name="player"></param>
+    /// <param name="score"></param>
+    public void AddScore(int player, int score)
+    {
+        if (player == 0)
+        {
+            dayScore += Mathf.RoundToInt(score + score * (dayCombo / COMBO_DIVIDER));
+            dayCombo++;
+            return;
+        }
+        nightScore += Mathf.RoundToInt(score + score * (nightCombo / COMBO_DIVIDER));
+        nightCombo++;
+    }
+
+    /// <summary>
+    /// Breaks a players combo, setting it to 0. (0 for player 1 or "day", 1 for player 2 or "night")
+    /// </summary>
+    /// <param name="player"></param>
+    public void ComboBreak(int player)
+    {
+        if (player == 0)
+        {
+            dayCombo = 0;
+            return;
+        }
+        nightCombo = 0;
     }
 }

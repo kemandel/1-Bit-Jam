@@ -29,23 +29,51 @@ public class InputBlock : MonoBehaviour
         }
 
         KeyCode code = day ? DayInput : NightInput;
-        if (Input.GetKeyDown(code))
+        if (currentNote != null)
         {
-            if (currentNote != null && !sliding)
+            float distance = Vector2.Distance(transform.position, currentNote.transform.position);
+            if (Input.GetKeyDown(code))
             {
-                float distance = Vector2.Distance(transform.position, currentNote.transform.position);
-                if (currentNote is SliderBlock)
+                if (!sliding)
                 {
-                    sliding = true;
-                    ((SliderBlock)currentNote).StartCollapse();
+                    if (currentNote is SliderBlock)
+                    {
+                        sliding = true;
+                        ((SliderBlock)currentNote).StartCollapse();
+                    }
+                    else
+                    {
+                        if (distance > GOOD_DISTANCE)
+                        {
+                            currentNote.Miss();
+                        }
+                        else if (distance > PERFECT_DISTANCE)
+                        {
+                            currentNote.GoodHit();
+                        }
+                        else
+                        {
+                            currentNote.PerfectHit();
+                        }
+                        currentNote = null;
+                    }
                 }
-                else
+            }
+            else if (distance > GOOD_DISTANCE && currentNote.transform.position.y < transform.position.y)
+            {
+                currentNote.Miss();
+                currentNote = null;
+            }
+
+            if (sliding)
+            {
+                if (Input.GetKeyUp(code))
                 {
-                    if (distance > GOOD_DISTANCE)
+                    if (distance > GOOD_DISTANCE_SLIDER)
                     {
                         currentNote.Miss();
                     }
-                    else if (distance > PERFECT_DISTANCE)
+                    else if (distance > PERFECT_DISTANCE_SLIDER)
                     {
                         currentNote.GoodHit();
                     }
@@ -54,39 +82,19 @@ public class InputBlock : MonoBehaviour
                         currentNote.PerfectHit();
                     }
                     currentNote = null;
+                    sliding = false;
                 }
-            }
-        }
-        if (sliding)
-        {
-            float distance = Vector2.Distance(transform.position, ((SliderBlock)currentNote).EndPoint);
-            if (Input.GetKeyUp(code))
-            {
-                if (distance > GOOD_DISTANCE_SLIDER)
+                else if (distance > GOOD_DISTANCE_SLIDER && ((SliderBlock)currentNote).EndPoint.y < transform.position.y)
                 {
                     currentNote.Miss();
+                    currentNote = null;
+                    sliding = false;
                 }
-                else if (distance > PERFECT_DISTANCE_SLIDER)
-                {
-                    currentNote.GoodHit();
-                }
-                else
-                {
-                    currentNote.PerfectHit();
-                }
-                currentNote = null;
-                sliding = false;
-            }
-            else if (distance > GOOD_DISTANCE_SLIDER && ((SliderBlock)currentNote).EndPoint.y < transform.position.y)
-            {
-                currentNote.Miss();
-                currentNote = null;
-                sliding = false;
             }
         }
     }
 
-    private void OnTriggerStay2D(Collider2D other)
+    private void OnTriggerEnter2D(Collider2D other) 
     {
         currentNote = other.GetComponent<NoteBlock>();
     }

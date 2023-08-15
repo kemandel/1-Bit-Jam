@@ -30,6 +30,8 @@ public class SliderBlock : NoteBlock
 
     public override void Update() 
     {
+        day = Camera.main.WorldToScreenPoint(transform.position).x / Screen.width <= FindObjectOfType<LevelManager>().lineX;
+
         endPoint = transform.GetChild(2).position;
         if (spriteDay != null && spriteNight != null)
         {
@@ -38,7 +40,7 @@ public class SliderBlock : NoteBlock
                 if (sr.sprite == spriteNight || sr.sprite == spriteDay)
                 {
                     sr.sprite = spriteNight;
-                    if (Camera.main.WorldToScreenPoint(transform.position).x / Screen.width <= FindObjectOfType<LevelManager>().lineX)
+                    if (day)
                     {
                         sr.sprite = spriteDay;
                     }
@@ -55,20 +57,48 @@ public class SliderBlock : NoteBlock
 
     public override void Miss()
     {
-        StopCoroutine(activeCoroutine);
         Debug.Log("Miss");
+        StopCoroutine(activeCoroutine);
+
+        for (int i = 0; i < 3; i++)
+        {
+            StartCoroutine(FadeCoroutine(FADE_DURATION, sRenderers[i]));
+        }
+
+        FindObjectOfType<LevelManager>().ComboBreak(day ? 1 : 0);
     }
 
     public override void GoodHit()
     {
-        StopCoroutine(activeCoroutine);
         Debug.Log("Good");
+        StopCoroutine(activeCoroutine);
+
+        sRenderers[0].enabled = false;
+        sRenderers[1].enabled = false;
+
+        StartCoroutine(FadeCoroutine(FADE_DURATION, sRenderers[2]));
+
+        FindObjectOfType<LevelManager>().AddScore(day ? 1 : 0, LevelManager.SCORE_GOOD * LevelManager.SLIDER_MULTI);
     }
 
     public override void PerfectHit()
     {
-        StopCoroutine(activeCoroutine);
         Debug.Log("Perfect");
+        StopCoroutine(activeCoroutine);
+
+        sRenderers[0].enabled = false;
+        sRenderers[1].enabled = false;
+
+        sRenderers[2].sprite = altSpriteNight;
+        if (day)
+        {
+            sRenderers[2].sprite = altSpriteDay;
+        }
+
+        StartCoroutine(FadeCoroutine(FADE_DURATION, sRenderers[2]));
+        StopCoroutine(activeCoroutine);
+
+        FindObjectOfType<LevelManager>().AddScore(day ? 1 : 0, LevelManager.SCORE_PERFECT * LevelManager.SLIDER_MULTI);
     }
 
     private IEnumerator CollapseCoroutine()

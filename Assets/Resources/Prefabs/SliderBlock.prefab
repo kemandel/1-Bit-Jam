@@ -156,7 +156,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 3
+  m_SortingOrder: 4
   m_Sprite: {fileID: -1227032645, guid: 822ff10b996fed24eb1e3f6d1fc24e80, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -279,7 +279,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6757097361033360585}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0.59375, y: 8.6875, z: 0}
   m_LocalScale: {x: 2, y: 2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -304,10 +304,10 @@ MonoBehaviour:
   fallTime: 3
   spriteDay: {fileID: -2083258313, guid: 822ff10b996fed24eb1e3f6d1fc24e80, type: 3}
   spriteNight: {fileID: -1227032645, guid: 822ff10b996fed24eb1e3f6d1fc24e80, type: 3}
-  altSpriteDay: {fileID: 0}
-  altSpriteNight: {fileID: 0}
-  length: 16.59375
-  duration: 0
+  altSpriteDay: {fileID: 1826592111, guid: 822ff10b996fed24eb1e3f6d1fc24e80, type: 3}
+  altSpriteNight: {fileID: -1338846453, guid: 822ff10b996fed24eb1e3f6d1fc24e80, type: 3}
+  length: 16.1875
+  duration: 3
 --- !u!61 &-8529212960434137054
 BoxCollider2D:
   m_ObjectHideFlags: 0
