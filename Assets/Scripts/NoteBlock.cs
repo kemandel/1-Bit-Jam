@@ -26,7 +26,7 @@ public class NoteBlock : MonoBehaviour
 
     public virtual void Update() 
     {
-        if (sRenderer.sprite != altSpriteDay && sRenderer.sprite != altSpriteNight)
+        if (sRenderer.sprite == spriteDay || sRenderer.sprite == spriteNight)
         {
             sRenderer.sprite = spriteNight;
             if (Camera.main.WorldToScreenPoint(transform.position).x / Screen.width <= FindObjectOfType<LevelManager>().lineX)
@@ -60,7 +60,7 @@ public class NoteBlock : MonoBehaviour
     {
         Debug.Log("Good");
         StopCoroutine(activeCoroutine);
-        StartCoroutine(FadeCoroutine(FADE_DURATION));
+        StartCoroutine(FadeCoroutine(FADE_DURATION, sRenderer));
     }
 
     public virtual void PerfectHit()
@@ -73,10 +73,10 @@ public class NoteBlock : MonoBehaviour
         }
 
         StopCoroutine(activeCoroutine);
-        StartCoroutine(FadeCoroutine(FADE_DURATION));
+        StartCoroutine(FadeCoroutine(FADE_DURATION, sRenderer));
     }
 
-    public virtual IEnumerator FadeCoroutine(float fadeDuration)
+    public virtual IEnumerator FadeCoroutine(float fadeDuration, SpriteRenderer sRenderer)
     {
         gameObject.GetComponent<BoxCollider2D>().enabled = false;
         float startTime = Time.time;

@@ -10,8 +10,8 @@ public class InputBlock : MonoBehaviour
     public const float GOOD_DISTANCE = .5f;
     public const float PERFECT_DISTANCE = .125f;
 
-    public const float GOOD_TIMING_SLIDER = .5f;
-    public const float PERFECT_TIMING_SLIDER = .25f;
+    public const float GOOD_DISTANCE_SLIDER = 1f;
+    public const float PERFECT_DISTANCE_SLIDER = .25f;
 
     public bool day;
     public KeyCode DayInput;
@@ -19,7 +19,6 @@ public class InputBlock : MonoBehaviour
 
     private NoteBlock currentNote = null;
     private bool sliding = false;
-    private float slideStart = 0;
 
     private void Update()
     {
@@ -34,15 +33,14 @@ public class InputBlock : MonoBehaviour
         {
             if (currentNote != null && !sliding)
             {
+                float distance = Vector2.Distance(transform.position, currentNote.transform.position);
                 if (currentNote is SliderBlock)
                 {
-                    slideStart = Time.time;
                     sliding = true;
+                    ((SliderBlock)currentNote).StartCollapse();
                 }
                 else
                 {
-                    float distance = Vector2.Distance(transform.position, currentNote.transform.position);
-
                     if (distance > GOOD_DISTANCE)
                     {
                         currentNote.Miss();
@@ -61,14 +59,14 @@ public class InputBlock : MonoBehaviour
         }
         if (sliding)
         {
+            float distance = Vector2.Distance(transform.position, ((SliderBlock)currentNote).EndPoint);
             if (Input.GetKeyUp(code))
             {
-                float timing = Mathf.Abs(Time.time - slideStart);
-                if (timing > GOOD_TIMING_SLIDER)
+                if (distance > GOOD_DISTANCE_SLIDER)
                 {
                     currentNote.Miss();
                 }
-                else if (timing > PERFECT_TIMING_SLIDER)
+                else if (distance > PERFECT_DISTANCE_SLIDER)
                 {
                     currentNote.GoodHit();
                 }
@@ -79,7 +77,7 @@ public class InputBlock : MonoBehaviour
                 currentNote = null;
                 sliding = false;
             }
-            else if (slideStart > Time.time + ((SliderBlock)currentNote).duration + 1f)
+            else if (distance > GOOD_DISTANCE_SLIDER && ((SliderBlock)currentNote).EndPoint.y < transform.position.y)
             {
                 currentNote.Miss();
                 currentNote = null;
