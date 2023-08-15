@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class SongPlayer : MonoBehaviour
 {
-    public const float SPAWN_SPACE = 1.5f;
+    public const float SPAWN_SPACE = 1.1875f;
     public const float NOTE_HEIGHT = 8.6875f;
 
     public void PlaySong(BeatMap map)
@@ -17,7 +17,7 @@ public class SongPlayer : MonoBehaviour
         yield return new WaitForSeconds(1f);
         AudioSource audio = GetComponent<AudioSource>();
         audio.clip = map.song;
-        audio.PlayScheduled(AudioSettings.dspTime + map.fallTime);
+        audio.PlayScheduled(AudioSettings.dspTime + map.fallTime - .125f);
         int i = 0;
         while (i < map.beatmap.Length)
         {
@@ -36,8 +36,10 @@ public class SongPlayer : MonoBehaviour
         {
             GameObject slider = (GameObject)Resources.Load("Prefabs/SliderBlock");
             float lengthPerSecond = (startingPosition.y - FindObjectOfType<LevelManager>().hitBar.position.y) / fallTime;
-            float sliderLength = lengthPerSecond * note.sliderDuration;
-            slider.transform.position = new Vector3(startingPosition.x, startingPosition.y + sliderLength / 2);
+            slider.GetComponent<SliderBlock>().length = lengthPerSecond * note.sliderDuration;
+            slider.GetComponent<SliderBlock>().fallTime = fallTime;
+            slider.transform.position = startingPosition;
+            Instantiate(slider);
         }
         else
         {

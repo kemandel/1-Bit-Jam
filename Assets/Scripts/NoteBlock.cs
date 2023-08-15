@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.U2D;
 
 public class NoteBlock : MonoBehaviour
 {
@@ -11,22 +12,28 @@ public class NoteBlock : MonoBehaviour
     public Sprite spriteDay;
     public Sprite spriteNight;
 
-    private void Start() 
+    public SpriteRenderer sRenderer;
+    public Coroutine activeCoroutine = null;
+
+    public virtual void Start() 
     {
-        StartCoroutine(FallCoroutine());
+        activeCoroutine = StartCoroutine(FallCoroutine());
+        sRenderer = FindObjectOfType<SpriteRenderer>();
     }
 
-    private void Update() 
+    public virtual void Update() 
     {
-        Sprite newSprite = spriteNight;
-        if (transform.position.x <= FindObjectOfType<LevelManager>().lineX)
+        if (spriteDay != null && spriteNight != null)
         {
-            newSprite = spriteDay;
+            sRenderer.sprite = spriteNight;
+            if (Camera.main.WorldToScreenPoint(transform.position).x / Screen.width <= FindObjectOfType<LevelManager>().lineX)
+            {
+                sRenderer.sprite = spriteDay;
+            }
         }
-        FindObjectOfType<SpriteRenderer>().sprite = newSprite;
     }
 
-    private IEnumerator FallCoroutine()
+    public IEnumerator FallCoroutine()
     {
         float startTime = Time.time;
         float startingPosY = transform.position.y;
@@ -39,5 +46,20 @@ public class NoteBlock : MonoBehaviour
             transform.position = new Vector2(transform.position.x, newY);
             yield return null;
         }
+    }
+
+    public virtual void Miss()
+    {
+
+    }
+
+    public virtual void GoodHit()
+    {
+        
+    }
+
+    public virtual void PerfectHit()
+    {
+        
     }
 }

@@ -26,7 +26,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7313380591289198497}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -5.25, y: 7.71875, z: 0}
+  m_LocalPosition: {x: -1.78125, y: 8.6875, z: 0}
   m_LocalScale: {x: 2, y: 2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -97,4 +97,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df59dc74900257e44b53b22d518dc515, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fallTime: 2
+  fallTime: 3
+  spriteDay: {fileID: -2083258313, guid: 822ff10b996fed24eb1e3f6d1fc24e80, type: 3}
+  spriteNight: {fileID: -1227032645, guid: 822ff10b996fed24eb1e3f6d1fc24e80, type: 3}

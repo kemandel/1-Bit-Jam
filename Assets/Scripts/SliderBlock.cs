@@ -1,17 +1,57 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
-public class SliderBlock : MonoBehaviour
+public class SliderBlock : NoteBlock
 {
-    public float fallTime;
+    public float length;
 
-    // Update is called once per frame
-    void Update()
+    private SpriteRenderer[] sRenderers;
+
+    public override void Start() 
     {
-        foreach (NoteBlock n in GetComponentsInChildren<NoteBlock>())
+        sRenderers = GetComponentsInChildren<SpriteRenderer>();
+
+        transform.GetChild(0).transform.position = transform.position;
+        transform.GetChild(2).transform.position = new Vector2(transform.position.x, transform.position.y + length);
+        transform.GetChild(1).transform.position = transform.GetChild(2).transform.position - transform.GetChild(0).transform.position;
+
+        transform.GetChild(1).transform.localScale = new Vector3(1, length / 2);
+
+        activeCoroutine = StartCoroutine(FallCoroutine());
+    }
+
+    public override void Update() 
+    {
+        if (spriteDay != null && spriteNight != null)
         {
-            n.fallTime = fallTime;
+            foreach (SpriteRenderer sr in sRenderers)
+            {
+                if (sr.sprite == spriteNight || sr.sprite == spriteDay)
+                {
+                    sr.sprite = spriteNight;
+                    if (Camera.main.WorldToScreenPoint(transform.position).x / Screen.width <= FindObjectOfType<LevelManager>().lineX)
+                    {
+                        sr.sprite = spriteDay;
+                    }
+                }
+            }
         }
+    }
+
+    public override void Miss()
+    {
+
+    }
+
+    public override void GoodHit()
+    {
+        
+    }
+
+    public override void PerfectHit()
+    {
+        
     }
 }
