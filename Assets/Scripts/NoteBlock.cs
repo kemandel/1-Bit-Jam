@@ -26,7 +26,7 @@ public class NoteBlock : MonoBehaviour
 
     public virtual void Update() 
     {
-        if (spriteDay != null && spriteNight != null)
+        if (sRenderer.sprite != altSpriteDay && sRenderer.sprite != altSpriteNight)
         {
             sRenderer.sprite = spriteNight;
             if (Camera.main.WorldToScreenPoint(transform.position).x / Screen.width <= FindObjectOfType<LevelManager>().lineX)
@@ -53,17 +53,19 @@ public class NoteBlock : MonoBehaviour
 
     public virtual void Miss()
     {
-        
+        Debug.Log("Miss");
     }
 
     public virtual void GoodHit()
     {
+        Debug.Log("Good");
         StopCoroutine(activeCoroutine);
         StartCoroutine(FadeCoroutine(FADE_DURATION));
     }
 
     public virtual void PerfectHit()
     {
+        Debug.Log("Perfect");
         sRenderer.sprite = altSpriteNight;
         if (Camera.main.WorldToScreenPoint(transform.position).x / Screen.width <= FindObjectOfType<LevelManager>().lineX)
         {

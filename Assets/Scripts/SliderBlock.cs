@@ -6,6 +6,7 @@ using UnityEngine;
 public class SliderBlock : NoteBlock
 {
     public float length;
+    public float duration;
 
     private SpriteRenderer[] sRenderers;
 
@@ -42,17 +43,17 @@ public class SliderBlock : NoteBlock
 
     public override void Miss()
     {
-
+        Debug.Log("Miss");
     }
 
     public override void GoodHit()
     {
-        
+        Debug.Log("Good");
     }
 
     public override void PerfectHit()
     {
-        
+        Debug.Log("Perfect");
     }
 
     public override IEnumerator FadeCoroutine(float fadeDuration)

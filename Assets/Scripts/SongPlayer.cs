@@ -38,6 +38,7 @@ public class SongPlayer : MonoBehaviour
             float lengthPerSecond = (startingPosition.y - FindObjectOfType<LevelManager>().hitBar.position.y) / fallTime;
             slider.GetComponent<SliderBlock>().length = lengthPerSecond * note.sliderDuration;
             slider.GetComponent<SliderBlock>().fallTime = fallTime;
+            slider.GetComponent<SliderBlock>().duration = note.sliderDuration;
             slider.transform.position = startingPosition;
             Instantiate(slider);
         }
