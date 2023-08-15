@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 public class InputBlock : MonoBehaviour
@@ -11,27 +12,47 @@ public class InputBlock : MonoBehaviour
     public KeyCode DayInput;
     public KeyCode NightInput;
 
-    private void OnTriggerStay2D(Collider2D other)
+    private NoteBlock currentNote = null;
+
+    private void Update() 
     {
-        if (Input.GetKeyDown(DayInput))
+        day = false;
+        if (Camera.main.WorldToScreenPoint(transform.position).x / Screen.width <= FindObjectOfType<LevelManager>().lineX)
         {
-            if (other.CompareTag("Note"))
+            day = true;
+        }
+
+        if (currentNote != null)
+        {
+            KeyCode code = day ? DayInput : NightInput;
+            if (Input.GetKeyDown(code))
             {
-                float distance = Vector2.Distance(transform.position, other.transform.position);
+                float distance = Vector2.Distance(transform.position, currentNote.transform.position);
+                Debug.Log("Distance: " + distance);
 
                 if (distance > GOOD_DISTANCE)
                 {
-                    other.GetComponentInChildren<NoteBlock>().Miss();
+                    Debug.Log("Miss");
+                    currentNote.Miss();
                 }
                 else if (distance > PERFECT_DISTANCE)
                 {
-                    other.GetComponentInChildren<NoteBlock>().GoodHit();
+                    Debug.Log("Good");
+                    currentNote.GoodHit();
                 }
-                else 
+                else
                 {
-                    other.GetComponentInChildren<NoteBlock>().PerfectHit();
+                    Debug.Log("Perfect");
+                    currentNote.PerfectHit();
                 }
+                currentNote = null;
             }
         }
+    }
+
+    private void OnTriggerStay2D(Collider2D other)
+    {
+        Debug.Log("Note Near Input");
+        currentNote = other.GetComponent<NoteBlock>();
     }
 }

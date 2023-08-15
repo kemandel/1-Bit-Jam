@@ -47,13 +47,23 @@ Shader "Unlit/ColorSwap"
             fixed4 frag (v2f i) : SV_Target
             {
                 // sample the texture
-                float3 col = tex2D(_MainTex, i.uv);
-                if (i.uv.x < _Swap_Line_X)
-                {
-                    float3 delta = abs(col - _Color_A);
-                    col = length(delta) < 0.1 ? _Color_B : _Color_A;
-                }
-                return fixed4(col, 1);
+                float4 rgba = tex2D(_MainTex, i.uv);
+                float3 col = rgba;
+                float a = rgba.a;
+
+                float3 d1x = length(_Color_A.x - _Color_B.x);
+                float3 d1y = length(_Color_A.y - _Color_B.y);
+                float3 d1z = length(_Color_A.z - _Color_B.z);
+
+                float3 d2x = length(_Color_A.x - col.x);
+                float3 d2y = length(_Color_A.y - col.y);
+                float3 d2z = length(_Color_A.z - col.z);
+                
+                float r = _Color_B.x + (_Color_A.x - _Color_B.x) * (d2x/d1x);
+                float g = _Color_B.y + (_Color_A.y - _Color_B.y) * (d2y/d1y);
+                float b = _Color_B.z + (_Color_A.z - _Color_B.z) * (d2z/d1z);
+
+                return (i.uv.x < _Swap_Line_X) ? fixed4(r, g, b, a) : rgba;
             }
 
             ENDCG
