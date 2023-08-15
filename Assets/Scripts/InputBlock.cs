@@ -67,6 +67,7 @@ public class InputBlock : MonoBehaviour
 
             if (sliding)
             {
+                distance = Mathf.Abs(Vector2.Distance(transform.position, ((SliderBlock)currentNote).EndPoint));
                 if (Input.GetKeyUp(code))
                 {
                     if (distance > GOOD_DISTANCE_SLIDER)

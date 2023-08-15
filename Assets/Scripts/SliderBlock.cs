@@ -65,7 +65,7 @@ public class SliderBlock : NoteBlock
             StartCoroutine(FadeCoroutine(FADE_DURATION, sRenderers[i]));
         }
 
-        FindObjectOfType<LevelManager>().ComboBreak(day ? 1 : 0);
+        FindObjectOfType<LevelManager>().ComboBreak(day ? 0 : 1);
     }
 
     public override void GoodHit()
@@ -78,7 +78,7 @@ public class SliderBlock : NoteBlock
 
         StartCoroutine(FadeCoroutine(FADE_DURATION, sRenderers[2]));
 
-        FindObjectOfType<LevelManager>().AddScore(day ? 1 : 0, LevelManager.SCORE_GOOD * LevelManager.SLIDER_MULTI);
+        FindObjectOfType<LevelManager>().AddScore(day ? 0 : 1, LevelManager.SCORE_GOOD * LevelManager.SLIDER_MULTI);
     }
 
     public override void PerfectHit()
@@ -98,7 +98,7 @@ public class SliderBlock : NoteBlock
         StartCoroutine(FadeCoroutine(FADE_DURATION, sRenderers[2]));
         StopCoroutine(activeCoroutine);
 
-        FindObjectOfType<LevelManager>().AddScore(day ? 1 : 0, LevelManager.SCORE_PERFECT * LevelManager.SLIDER_MULTI);
+        FindObjectOfType<LevelManager>().AddScore(day ? 0 : 1, LevelManager.SCORE_PERFECT * LevelManager.SLIDER_MULTI);
     }
 
     private IEnumerator CollapseCoroutine()

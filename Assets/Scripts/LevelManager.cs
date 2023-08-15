@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class LevelManager : MonoBehaviour
 {
@@ -8,6 +9,11 @@ public class LevelManager : MonoBehaviour
     public const int SCORE_PERFECT = 100;
     public const int COMBO_DIVIDER = 100;
     public const int SLIDER_MULTI = 2;
+
+    public Text DayScoreText;
+    public Text NightScoreText;
+    public Text DayComboText;
+    public Text NightComboText;
 
     [HideInInspector]
     public float lineX;
@@ -36,6 +42,11 @@ public class LevelManager : MonoBehaviour
         {
             GetComponent<SongPlayer>().PlaySong((BeatMap)Resources.Load("Beatmaps/Beatmap"));
         }
+
+        DayScoreText.text = $"Score: {dayScore:D6}";
+        DayComboText.text = $"Combo: {dayCombo}x" ;
+        NightScoreText.text = $"Score: {nightScore:D6}";
+        NightComboText.text = $"Combo: {nightCombo}x" ;
     }
 
     /// <summary>
@@ -47,11 +58,11 @@ public class LevelManager : MonoBehaviour
     {
         if (player == 0)
         {
-            dayScore += Mathf.RoundToInt(score + score * (dayCombo / COMBO_DIVIDER));
+            dayScore += Mathf.RoundToInt(score + score * (((float)dayCombo) / COMBO_DIVIDER));
             dayCombo++;
             return;
         }
-        nightScore += Mathf.RoundToInt(score + score * (nightCombo / COMBO_DIVIDER));
+        nightScore += Mathf.RoundToInt(score + score * (((float)nightCombo) / COMBO_DIVIDER));
         nightCombo++;
     }
 

@@ -60,7 +60,7 @@ public class NoteBlock : MonoBehaviour
     {
         Debug.Log("Miss");
 
-        FindObjectOfType<LevelManager>().ComboBreak(day ? 1 : 0);
+        FindObjectOfType<LevelManager>().ComboBreak(day ? 0 : 1);
     }
 
     public virtual void GoodHit()
@@ -69,7 +69,7 @@ public class NoteBlock : MonoBehaviour
         StopCoroutine(activeCoroutine);
         StartCoroutine(FadeCoroutine(FADE_DURATION, sRenderer));
         
-        FindObjectOfType<LevelManager>().AddScore(day ? 1 : 0, LevelManager.SCORE_GOOD);
+        FindObjectOfType<LevelManager>().AddScore(day ? 0 : 1, LevelManager.SCORE_GOOD);
     }
 
     public virtual void PerfectHit()
@@ -84,7 +84,7 @@ public class NoteBlock : MonoBehaviour
         StopCoroutine(activeCoroutine);
         StartCoroutine(FadeCoroutine(FADE_DURATION, sRenderer));
 
-        FindObjectOfType<LevelManager>().AddScore(day ? 1 : 0, LevelManager.SCORE_PERFECT);
+        FindObjectOfType<LevelManager>().AddScore(day ? 0 : 1, LevelManager.SCORE_PERFECT);
     }
 
     public virtual IEnumerator FadeCoroutine(float fadeDuration, SpriteRenderer sRenderer)
