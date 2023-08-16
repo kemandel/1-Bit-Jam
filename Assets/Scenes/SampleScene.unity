@@ -154,10 +154,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 69c469ccebe25e243996a6dde47d6142, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DayScore: {fileID: 1302760364}
-  NightScore: {fileID: 0}
-  DayCombo: {fileID: 0}
-  NightCombo: {fileID: 0}
+  moveMouse: 0
+  DayScoreText: {fileID: 1302760364}
+  NightScoreText: {fileID: 2048146491}
+  DayComboText: {fileID: 1393292276}
+  NightComboText: {fileID: 1032417362}
   lineX: 0
   dayScore: 0
   nightScore: 0
@@ -599,8 +600,8 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1302760363}
-  - {fileID: 1393292275}
   - {fileID: 2048146490}
+  - {fileID: 1393292275}
   - {fileID: 1032417361}
   m_Father: {fileID: 0}
   m_RootOrder: 4
@@ -1743,7 +1744,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 374161630}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
@@ -2019,7 +2020,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 374161630}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}

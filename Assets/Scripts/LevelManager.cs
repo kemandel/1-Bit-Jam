@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SocialPlatforms.Impl;
 using UnityEngine.UI;
 
 public class LevelManager : MonoBehaviour
@@ -9,6 +10,13 @@ public class LevelManager : MonoBehaviour
     public const int SCORE_PERFECT = 100;
     public const int COMBO_DIVIDER = 100;
     public const int SLIDER_MULTI = 2;
+
+    public const int COMBO_DIFFERENCE_NUM_1 = 50;
+    public const int COMBO_DIFFERENCE_NUM_2 = 100;
+    public const float COMBO_DIFFERENCE_RATIO_1 = 1.5f;
+    public const float COMBO_DIFFERENCE_RATIO_2 = 2.0f;
+
+    public bool moveMouse = false;
 
     public Text DayScoreText;
     public Text NightScoreText;
@@ -28,7 +36,7 @@ public class LevelManager : MonoBehaviour
 
     public Transform hitBar;
 
-    private void Awake() 
+    private void Awake()
     {
         lineX = .5f;
     }
@@ -36,17 +44,20 @@ public class LevelManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        lineX = Input.mousePosition.x / Screen.width;
+        if (moveMouse)
+        {
+            lineX = Input.mousePosition.x / Screen.width;
+        }
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            GetComponent<SongPlayer>().PlaySong((BeatMap)Resources.Load("Beatmaps/Beatmap"));
+            GetComponent<SongPlayer>().PlaySong((BeatMap)Resources.Load("Beatmaps/EnterTheLair"));
         }
 
         DayScoreText.text = $"Score: {dayScore:D6}";
-        DayComboText.text = $"Combo: {dayCombo}x" ;
+        DayComboText.text = $"Combo: {dayCombo}x";
         NightScoreText.text = $"Score: {nightScore:D6}";
-        NightComboText.text = $"Combo: {nightCombo}x" ;
+        NightComboText.text = $"Combo: {nightCombo}x";
     }
 
     /// <summary>
@@ -78,5 +89,22 @@ public class LevelManager : MonoBehaviour
             return;
         }
         nightCombo = 0;
+    }
+
+    public void CheckLine()
+    {
+        float delta = Mathf.Abs(dayCombo - nightCombo);
+        float ratio = dayCombo >= nightCombo ? (dayCombo / (nightCombo > 0 ? nightCombo : 1)) : (nightCombo / (dayCombo > 0 ? dayCombo : 1));
+
+        if (delta >= COMBO_DIFFERENCE_NUM_2 && ratio >= COMBO_DIFFERENCE_RATIO_2)
+        {
+            lineX = dayScore > nightScore ? -SongPlayer.SPAWN_SPACE : SongPlayer.SPAWN_SPACE;
+            return;
+        }
+
+        if (delta > COMBO_DIFFERENCE_NUM_1 && ratio >= COMBO_DIFFERENCE_RATIO_1)
+        {
+            lineX = dayScore > nightScore ? -SongPlayer.SPAWN_SPACE / 2 : SongPlayer.SPAWN_SPACE / 2;
+        }
     }
 }

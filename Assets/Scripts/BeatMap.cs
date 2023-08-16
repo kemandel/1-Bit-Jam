@@ -13,6 +13,7 @@ public class BeatMap : ScriptableObject
 [System.Serializable]
 public struct Note 
 {
+    public bool lineCheckAfter;
     public bool slider;
     public float sliderDuration;
     public int position;

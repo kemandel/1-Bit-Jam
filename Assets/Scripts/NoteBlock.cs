@@ -59,6 +59,8 @@ public class NoteBlock : MonoBehaviour
     public virtual void Miss()
     {
         Debug.Log("Miss");
+        StopCoroutine(activeCoroutine);
+        StartCoroutine(FadeCoroutine(FADE_DURATION, sRenderer));
 
         FindObjectOfType<LevelManager>().ComboBreak(day ? 0 : 1);
     }
@@ -91,15 +93,15 @@ public class NoteBlock : MonoBehaviour
     {
         gameObject.GetComponent<BoxCollider2D>().enabled = false;
         float startTime = Time.time;
-        float passedTime = 0;
-        while(passedTime < startTime)
+        while(sRenderer.color.a > 0)
         {
-            passedTime = Time.time - startTime;
+            float passedTime = Time.time - startTime;
             float ratio = passedTime / fadeDuration;
             float newAlpha = Mathf.Lerp(1, 0, ratio);
             sRenderer.color = new Color(sRenderer.color.r, sRenderer.color.g, sRenderer.color.b, newAlpha);
             yield return null;
         }
+        Debug.Log("Finished Note");
         Destroy(gameObject);
     }
 }

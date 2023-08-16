@@ -21,11 +21,18 @@ public class SongPlayer : MonoBehaviour
         int i = 0;
         while (i < map.beatmap.Length)
         {
+            if (map.beatmap[i].lineCheckAfter) StartCoroutine(CheckLineCoroutine(map.fallTime));
             SpawnNote(map.beatmap[i], map.fallTime);
             if (i + 1 < map.beatmap.Length)
                 yield return new WaitForSeconds(map.beatmap[i+1].time - map.beatmap[i].time);
             i++;
         }
+    }
+
+    private IEnumerator CheckLineCoroutine(float fallTime)
+    {
+        yield return new WaitForSeconds(fallTime * 10 / 9);
+        FindObjectOfType<LevelManager>().CheckLine();
     }
 
     private void SpawnNote(Note note, float fallTime)

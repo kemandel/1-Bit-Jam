@@ -17,7 +17,7 @@ public class InputBlock : MonoBehaviour
     public KeyCode DayInput;
     public KeyCode NightInput;
 
-    private NoteBlock currentNote = null;
+    private List<NoteBlock> currentNotes = new List<NoteBlock>();
     private bool sliding = false;
 
     private void Update()
@@ -29,66 +29,66 @@ public class InputBlock : MonoBehaviour
         }
 
         KeyCode code = day ? DayInput : NightInput;
-        if (currentNote != null)
+        if (currentNotes.Count > 0)
         {
-            float distance = Vector2.Distance(transform.position, currentNote.transform.position);
+            float distance = Vector2.Distance(transform.position, currentNotes[0].transform.position);
             if (Input.GetKeyDown(code))
             {
                 if (!sliding)
                 {
-                    if (currentNote is SliderBlock)
+                    if (currentNotes[0] is SliderBlock)
                     {
                         sliding = true;
-                        ((SliderBlock)currentNote).StartCollapse();
+                        ((SliderBlock)currentNotes[0]).StartCollapse();
                     }
                     else
                     {
                         if (distance > GOOD_DISTANCE)
                         {
-                            currentNote.Miss();
+                            currentNotes[0].Miss();
                         }
                         else if (distance > PERFECT_DISTANCE)
                         {
-                            currentNote.GoodHit();
+                            currentNotes[0].GoodHit();
                         }
                         else
                         {
-                            currentNote.PerfectHit();
+                            currentNotes[0].PerfectHit();
                         }
-                        currentNote = null;
+                        currentNotes.RemoveAt(0);
                     }
                 }
             }
-            else if (distance > GOOD_DISTANCE && currentNote.transform.position.y < transform.position.y)
+            else if (distance > GOOD_DISTANCE && currentNotes[0].transform.position.y < transform.position.y)
             {
-                currentNote.Miss();
-                currentNote = null;
+                currentNotes[0].Miss();
+                currentNotes.RemoveAt(0);
             }
 
             if (sliding)
             {
-                distance = Mathf.Abs(Vector2.Distance(transform.position, ((SliderBlock)currentNote).EndPoint));
+                distance = Mathf.Abs(Vector2.Distance(transform.position, ((SliderBlock)currentNotes[0]).EndPoint));
                 if (Input.GetKeyUp(code))
                 {
                     if (distance > GOOD_DISTANCE_SLIDER)
                     {
-                        currentNote.Miss();
+                        currentNotes[0].Miss();
                     }
                     else if (distance > PERFECT_DISTANCE_SLIDER)
                     {
-                        currentNote.GoodHit();
+                        currentNotes[0].GoodHit();
                     }
                     else
                     {
-                        currentNote.PerfectHit();
+                        currentNotes[0].PerfectHit();
                     }
-                    currentNote = null;
+                    currentNotes.RemoveAt(0);
                     sliding = false;
                 }
-                else if (distance > GOOD_DISTANCE_SLIDER && ((SliderBlock)currentNote).EndPoint.y < transform.position.y)
+                else if (distance > GOOD_DISTANCE_SLIDER && ((SliderBlock)currentNotes[0]).EndPoint.y < transform.position.y)
                 {
-                    currentNote.Miss();
-                    currentNote = null;
+                    currentNotes[0].Miss();
+                    currentNotes.RemoveAt(0);
                     sliding = false;
                 }
             }
@@ -97,6 +97,6 @@ public class InputBlock : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other) 
     {
-        currentNote = other.GetComponent<NoteBlock>();
+        currentNotes.Add(other.GetComponent<NoteBlock>());
     }
 }
