@@ -26,7 +26,7 @@ public class LevelManager : MonoBehaviour
     public Text NightComboText;
 
     public float LineX { get { return lineX; } }
-    
+
     [HideInInspector]
     public int dayScore;
     [HideInInspector]
@@ -118,13 +118,12 @@ public class LevelManager : MonoBehaviour
     {
         float startTime = Time.time;
         float currentTime = 0;
-        float oldXPos = newXPos;
+        float oldXPos = lineX;
         while (currentTime <= moveTime)
         {
             currentTime = Time.time - startTime;
             float ratio = currentTime / moveTime;
             lineX = Mathf.Lerp(oldXPos, newXPos, ratio);
-            Debug.Log("Line Position: " + lineX);
             yield return null;
         }
     }
