@@ -21,7 +21,13 @@ public class SongPlayer : MonoBehaviour
         int i = 0;
         while (i < map.beatmap.Length)
         {
-            if (map.beatmap[i].lineCheckAfter) StartCoroutine(CheckLineCoroutine(map.fallTime));
+            if (map.beatmap[i].LineCheck)
+            {
+                if (!map.beatmap[i].slider)
+                    StartCoroutine(CheckLineCoroutine(map.fallTime));
+                else
+                    StartCoroutine(CheckLineCoroutine(map.fallTime + map.beatmap[i].sliderDuration));
+            }
             SpawnNote(map.beatmap[i], map.fallTime);
             if (i + 1 < map.beatmap.Length)
                 yield return new WaitForSeconds(map.beatmap[i+1].time - map.beatmap[i].time);
@@ -31,7 +37,7 @@ public class SongPlayer : MonoBehaviour
 
     private IEnumerator CheckLineCoroutine(float fallTime)
     {
-        yield return new WaitForSeconds(fallTime * 10 / 9);
+        yield return new WaitForSeconds(fallTime);
         FindObjectOfType<LevelManager>().CheckLine();
     }
 

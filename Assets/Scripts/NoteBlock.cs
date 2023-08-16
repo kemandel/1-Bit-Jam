@@ -30,7 +30,7 @@ public class NoteBlock : MonoBehaviour
 
     public virtual void Update() 
     {
-        day = Camera.main.WorldToScreenPoint(transform.position).x / Screen.width <= FindObjectOfType<LevelManager>().lineX;
+        day = Camera.main.WorldToScreenPoint(transform.position).x / Screen.width <= FindObjectOfType<LevelManager>().LineX;
         if (sRenderer.sprite == spriteDay || sRenderer.sprite == spriteNight)
         {
             sRenderer.sprite = spriteNight;
@@ -58,7 +58,6 @@ public class NoteBlock : MonoBehaviour
 
     public virtual void Miss()
     {
-        Debug.Log("Miss");
         StopCoroutine(activeCoroutine);
         StartCoroutine(FadeCoroutine(FADE_DURATION, sRenderer));
 
@@ -67,7 +66,6 @@ public class NoteBlock : MonoBehaviour
 
     public virtual void GoodHit()
     {
-        Debug.Log("Good");
         StopCoroutine(activeCoroutine);
         StartCoroutine(FadeCoroutine(FADE_DURATION, sRenderer));
         
@@ -76,7 +74,6 @@ public class NoteBlock : MonoBehaviour
 
     public virtual void PerfectHit()
     {
-        Debug.Log("Perfect");
         sRenderer.sprite = altSpriteNight;
         if (day)
         {
@@ -101,7 +98,6 @@ public class NoteBlock : MonoBehaviour
             sRenderer.color = new Color(sRenderer.color.r, sRenderer.color.g, sRenderer.color.b, newAlpha);
             yield return null;
         }
-        Debug.Log("Finished Note");
         Destroy(gameObject);
     }
 }

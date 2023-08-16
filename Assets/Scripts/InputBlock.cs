@@ -17,13 +17,14 @@ public class InputBlock : MonoBehaviour
     public KeyCode DayInput;
     public KeyCode NightInput;
 
-    private List<NoteBlock> currentNotes = new List<NoteBlock>();
-    private bool sliding = false;
+    public List<NoteBlock> currentNotes = new List<NoteBlock>();
+    [HideInInspector]
+    public bool sliding = false;
 
     private void Update()
     {
         day = false;
-        if (Camera.main.WorldToScreenPoint(transform.position).x / Screen.width <= FindObjectOfType<LevelManager>().lineX)
+        if (Camera.main.WorldToScreenPoint(transform.position).x / Screen.width <= FindObjectOfType<LevelManager>().LineX)
         {
             day = true;
         }

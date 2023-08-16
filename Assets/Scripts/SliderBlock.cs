@@ -30,7 +30,7 @@ public class SliderBlock : NoteBlock
 
     public override void Update() 
     {
-        day = Camera.main.WorldToScreenPoint(transform.position).x / Screen.width <= FindObjectOfType<LevelManager>().lineX;
+        day = Camera.main.WorldToScreenPoint(transform.position).x / Screen.width <= FindObjectOfType<LevelManager>().LineX;
 
         endPoint = transform.GetChild(2).position;
         if (spriteDay != null && spriteNight != null)
@@ -57,7 +57,6 @@ public class SliderBlock : NoteBlock
 
     public override void Miss()
     {
-        Debug.Log("Miss");
         StopCoroutine(activeCoroutine);
 
         for (int i = 0; i < 3; i++)
@@ -70,7 +69,6 @@ public class SliderBlock : NoteBlock
 
     public override void GoodHit()
     {
-        Debug.Log("Good");
         StopCoroutine(activeCoroutine);
 
         sRenderers[0].enabled = false;
@@ -83,7 +81,6 @@ public class SliderBlock : NoteBlock
 
     public override void PerfectHit()
     {
-        Debug.Log("Perfect");
         StopCoroutine(activeCoroutine);
 
         sRenderers[0].enabled = false;
@@ -119,6 +116,14 @@ public class SliderBlock : NoteBlock
             yield return null;
         }
         yield return new WaitForSeconds((fallTime / (SongPlayer.NOTE_HEIGHT - FindObjectOfType<LevelManager>().hitBar.position.y)) * InputBlock.GOOD_DISTANCE_SLIDER);
+        foreach (InputBlock input in FindObjectsOfType<InputBlock>())
+        {
+            if (input.currentNotes.Count > 0 && input.currentNotes[0] == this)
+            {
+                input.currentNotes.RemoveAt(0);
+                input.sliding = false;
+            }
+        }
         Miss();
     }
 }

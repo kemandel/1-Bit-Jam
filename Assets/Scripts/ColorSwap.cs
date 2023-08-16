@@ -19,7 +19,7 @@ public class ColorSwap : MonoBehaviour
 
     private void OnRenderImage(RenderTexture src, RenderTexture dest) 
     {
-        postProcessing.SetFloat("_Swap_Line_X", FindObjectOfType<LevelManager>().lineX);
+        postProcessing.SetFloat("_Swap_Line_X", FindObjectOfType<LevelManager>().LineX);
         Graphics.Blit(src, dest, postProcessing);
     }
 }
