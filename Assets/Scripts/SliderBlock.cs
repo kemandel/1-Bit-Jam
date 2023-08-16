@@ -76,7 +76,7 @@ public class SliderBlock : NoteBlock
 
         StartCoroutine(FadeCoroutine(FADE_DURATION, sRenderers[2]));
 
-        FindObjectOfType<LevelManager>().AddScore(day ? 0 : 1, LevelManager.SCORE_GOOD * LevelManager.SLIDER_MULTI);
+        FindObjectOfType<LevelManager>().AddScore(day ? 0 : 1, LevelManager.SCORE_GOOD, true);
     }
 
     public override void PerfectHit()
@@ -95,7 +95,7 @@ public class SliderBlock : NoteBlock
         StartCoroutine(FadeCoroutine(FADE_DURATION, sRenderers[2]));
         StopCoroutine(activeCoroutine);
 
-        FindObjectOfType<LevelManager>().AddScore(day ? 0 : 1, LevelManager.SCORE_PERFECT * LevelManager.SLIDER_MULTI);
+        FindObjectOfType<LevelManager>().AddScore(day ? 0 : 1, LevelManager.SCORE_PERFECT, true);
     }
 
     private IEnumerator CollapseCoroutine()

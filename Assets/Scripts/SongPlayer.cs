@@ -37,12 +37,13 @@ public class SongPlayer : MonoBehaviour
 
     private IEnumerator CheckLineCoroutine(float fallTime)
     {
-        yield return new WaitForSeconds(fallTime);
+        yield return new WaitForSeconds(fallTime + fallTime / 12);
         FindObjectOfType<LevelManager>().CheckLine();
     }
 
     private void SpawnNote(Note note, float fallTime)
     {
+        Debug.Log("Desync: " + Mathf.Abs(FindObjectOfType<AudioSource>().time - note.time + fallTime));
         Vector3 startingPosition = new Vector3(SPAWN_SPACE * note.position - SPAWN_SPACE * (4 - .5f), NOTE_HEIGHT);
 
         if (note.slider)

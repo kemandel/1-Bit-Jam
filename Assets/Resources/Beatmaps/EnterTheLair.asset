@@ -239,49 +239,434 @@ MonoBehaviour:
     sliderDuration: 3
     position: 7
     time: 20.5
-  - LineCheck: 0
+  - LineCheck: 1
     slider: 0
     sliderDuration: 3
     position: 6
     time: 20.75
   - LineCheck: 0
     slider: 1
-    sliderDuration: 3
+    sliderDuration: 2.75
     position: 6
     time: 24
   - LineCheck: 0
     slider: 1
-    sliderDuration: 3
+    sliderDuration: 2.75
     position: 2
     time: 24
   - LineCheck: 0
     slider: 1
-    sliderDuration: 3
+    sliderDuration: 2.75
     position: 5
     time: 27
   - LineCheck: 0
     slider: 1
-    sliderDuration: 3
+    sliderDuration: 2.75
     position: 1
     time: 27
   - LineCheck: 0
     slider: 1
-    sliderDuration: 3
+    sliderDuration: 2.75
     position: 7
     time: 30
   - LineCheck: 0
     slider: 1
-    sliderDuration: 3
+    sliderDuration: 2.75
     position: 3
     time: 30
   - LineCheck: 0
     slider: 1
-    sliderDuration: 3
+    sliderDuration: 2.75
     position: 4
     time: 33
-  - LineCheck: 0
+  - LineCheck: 1
     slider: 1
-    sliderDuration: 3
+    sliderDuration: 2.75
     position: 0
     time: 33
+  - LineCheck: 0
+    slider: 0
+    sliderDuration: 3
+    position: 0
+    time: 37.5
+  - LineCheck: 0
+    slider: 0
+    sliderDuration: 3
+    position: 1
+    time: 37.75
+  - LineCheck: 0
+    slider: 0
+    sliderDuration: 3
+    position: 2
+    time: 38
+  - LineCheck: 0
+    slider: 0
+    sliderDuration: 3
+    position: 3
+    time: 38.25
+  - LineCheck: 0
+    slider: 0
+    sliderDuration: 3
+    position: 4
+    time: 38.5
+  - LineCheck: 1
+    slider: 0
+    sliderDuration: 3
+    position: 5
+    time: 38.75
+  - LineCheck: 0
+    slider: 0
+    sliderDuration: 3
+    position: 6
+    time: 40.5
+  - LineCheck: 0
+    slider: 0
+    sliderDuration: 3
+    position: 5
+    time: 40.75
+  - LineCheck: 0
+    slider: 0
+    sliderDuration: 3
+    position: 4
+    time: 41
+  - LineCheck: 0
+    slider: 0
+    sliderDuration: 3
+    position: 3
+    time: 41.25
+  - LineCheck: 0
+    slider: 0
+    sliderDuration: 3
+    position: 2
+    time: 41.5
+  - LineCheck: 1
+    slider: 0
+    sliderDuration: 3
+    position: 1
+    time: 41.75
+  - LineCheck: 0
+    slider: 0
+    sliderDuration: 3
+    position: 2
+    time: 43.5
+  - LineCheck: 0
+    slider: 0
+    sliderDuration: 3
+    position: 3
+    time: 43.75
+  - LineCheck: 0
+    slider: 0
+    sliderDuration: 3
+    position: 4
+    time: 44
+  - LineCheck: 0
+    slider: 0
+    sliderDuration: 3
+    position: 5
+    time: 44.25
+  - LineCheck: 0
+    slider: 0
+    sliderDuration: 3
+    position: 6
+    time: 44.5
+  - LineCheck: 1
+    slider: 0
+    sliderDuration: 3
+    position: 7
+    time: 44.75
+  - LineCheck: 0
+    slider: 0
+    sliderDuration: 0.25
+    position: 4
+    time: 48
+  - LineCheck: 0
+    slider: 0
+    sliderDuration: 0.25
+    position: 5
+    time: 48.5
+  - LineCheck: 0
+    slider: 0
+    sliderDuration: 0.25
+    position: 6
+    time: 49
+  - LineCheck: 0
+    slider: 1
+    sliderDuration: 1.25
+    position: 7
+    time: 49.5
+  - LineCheck: 0
+    slider: 0
+    sliderDuration: 1.5
+    position: 0
+    time: 50
+  - LineCheck: 0
+    slider: 0
+    sliderDuration: 1.5
+    position: 1
+    time: 50.125
+  - LineCheck: 0
+    slider: 1
+    sliderDuration: 1
+    position: 2
+    time: 50.25
+  - LineCheck: 0
+    slider: 1
+    sliderDuration: 1.25
+    position: 6
+    time: 51
+  - LineCheck: 0
+    slider: 0
+    sliderDuration: 1.5
+    position: 0
+    time: 51.5
+  - LineCheck: 0
+    slider: 0
+    sliderDuration: 1.5
+    position: 1
+    time: 51.625
+  - LineCheck: 0
+    slider: 1
+    sliderDuration: 1
+    position: 2
+    time: 51.75
+  - LineCheck: 0
+    slider: 1
+    sliderDuration: 1.25
+    position: 5
+    time: 52.5
+  - LineCheck: 0
+    slider: 0
+    sliderDuration: 1.5
+    position: 0
+    time: 53
+  - LineCheck: 0
+    slider: 0
+    sliderDuration: 1.5
+    position: 1
+    time: 53.125
+  - LineCheck: 1
+    slider: 1
+    sliderDuration: 1
+    position: 2
+    time: 53.25
+  - LineCheck: 0
+    slider: 0
+    sliderDuration: 1
+    position: 3
+    time: 54.5
+  - LineCheck: 0
+    slider: 0
+    sliderDuration: 1
+    position: 2
+    time: 55
+  - LineCheck: 0
+    slider: 0
+    sliderDuration: 1
+    position: 1
+    time: 55.5
+  - LineCheck: 0
+    slider: 1
+    sliderDuration: 1.25
+    position: 0
+    time: 56
+  - LineCheck: 0
+    slider: 0
+    sliderDuration: 1.25
+    position: 7
+    time: 56.5
+  - LineCheck: 0
+    slider: 0
+    sliderDuration: 1.25
+    position: 6
+    time: 56.625
+  - LineCheck: 0
+    slider: 1
+    sliderDuration: 1
+    position: 5
+    time: 56.75
+  - LineCheck: 0
+    slider: 0
+    sliderDuration: 1.25
+    position: 0
+    time: 57.5
+  - LineCheck: 0
+    slider: 0
+    sliderDuration: 1.25
+    position: 1
+    time: 58
+  - LineCheck: 0
+    slider: 0
+    sliderDuration: 1.25
+    position: 7
+    time: 58
+  - LineCheck: 0
+    slider: 0
+    sliderDuration: 1.25
+    position: 6
+    time: 58.125
+  - LineCheck: 0
+    slider: 1
+    sliderDuration: 1
+    position: 5
+    time: 58.25
+  - LineCheck: 0
+    slider: 1
+    sliderDuration: 1.75
+    position: 2
+    time: 58.5
+  - LineCheck: 0
+    slider: 0
+    sliderDuration: 1.75
+    position: 7
+    time: 59.5
+  - LineCheck: 0
+    slider: 0
+    sliderDuration: 1.75
+    position: 6
+    time: 59.625
+  - LineCheck: 1
+    slider: 1
+    sliderDuration: 1
+    position: 5
+    time: 59.75
+  - LineCheck: 0
+    slider: 1
+    sliderDuration: 2.75
+    position: 6
+    time: 61.5
+  - LineCheck: 0
+    slider: 0
+    sliderDuration: 1
+    position: 0
+    time: 61.5
+  - LineCheck: 0
+    slider: 0
+    sliderDuration: 1
+    position: 0
+    time: 62
+  - LineCheck: 0
+    slider: 0
+    sliderDuration: 1
+    position: 1
+    time: 62.5
+  - LineCheck: 0
+    slider: 0
+    sliderDuration: 1
+    position: 0
+    time: 63
+  - LineCheck: 0
+    slider: 0
+    sliderDuration: 1
+    position: 0
+    time: 63.5
+  - LineCheck: 0
+    slider: 0
+    sliderDuration: 1
+    position: 1
+    time: 64
+  - LineCheck: 0
+    slider: 1
+    sliderDuration: 2.75
+    position: 5
+    time: 64.5
+  - LineCheck: 0
+    slider: 0
+    sliderDuration: 2.75
+    position: 1
+    time: 64.5
+  - LineCheck: 0
+    slider: 0
+    sliderDuration: 2.75
+    position: 1
+    time: 65
+  - LineCheck: 0
+    slider: 0
+    sliderDuration: 2.75
+    position: 2
+    time: 65.5
+  - LineCheck: 0
+    slider: 0
+    sliderDuration: 2.75
+    position: 1
+    time: 66
+  - LineCheck: 0
+    slider: 0
+    sliderDuration: 2.75
+    position: 1
+    time: 66.5
+  - LineCheck: 0
+    slider: 0
+    sliderDuration: 2.75
+    position: 2
+    time: 67
+  - LineCheck: 0
+    slider: 1
+    sliderDuration: 2.75
+    position: 7
+    time: 67.5
+  - LineCheck: 0
+    slider: 0
+    sliderDuration: 2.75
+    position: 2
+    time: 67.5
+  - LineCheck: 0
+    slider: 0
+    sliderDuration: 2.75
+    position: 2
+    time: 68
+  - LineCheck: 0
+    slider: 0
+    sliderDuration: 2.75
+    position: 3
+    time: 68.5
+  - LineCheck: 0
+    slider: 0
+    sliderDuration: 2.75
+    position: 2
+    time: 69
+  - LineCheck: 0
+    slider: 0
+    sliderDuration: 2.75
+    position: 2
+    time: 69.5
+  - LineCheck: 0
+    slider: 0
+    sliderDuration: 2.75
+    position: 3
+    time: 70
+  - LineCheck: 0
+    slider: 1
+    sliderDuration: 2.75
+    position: 4
+    time: 70.5
+  - LineCheck: 0
+    slider: 0
+    sliderDuration: 2.75
+    position: 3
+    time: 70.5
+  - LineCheck: 0
+    slider: 0
+    sliderDuration: 2.75
+    position: 3
+    time: 71
+  - LineCheck: 0
+    slider: 0
+    sliderDuration: 2.75
+    position: 2
+    time: 71.5
+  - LineCheck: 0
+    slider: 0
+    sliderDuration: 2.75
+    position: 2
+    time: 72
+  - LineCheck: 0
+    slider: 0
+    sliderDuration: 2.75
+    position: 1
+    time: 72.5
+  - LineCheck: 0
+    slider: 0
+    sliderDuration: 2.75
+    position: 1
+    time: 73
   song: {fileID: 8300000, guid: 44727246b9551844aa88d6f7b962e904, type: 3}

@@ -159,7 +159,6 @@ MonoBehaviour:
   NightScoreText: {fileID: 2048146491}
   DayComboText: {fileID: 1393292276}
   NightComboText: {fileID: 1032417362}
-  lineX: 0
   dayScore: 0
   nightScore: 0
   dayCombo: 0

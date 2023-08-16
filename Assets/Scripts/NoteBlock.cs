@@ -69,7 +69,7 @@ public class NoteBlock : MonoBehaviour
         StopCoroutine(activeCoroutine);
         StartCoroutine(FadeCoroutine(FADE_DURATION, sRenderer));
         
-        FindObjectOfType<LevelManager>().AddScore(day ? 0 : 1, LevelManager.SCORE_GOOD);
+        FindObjectOfType<LevelManager>().AddScore(day ? 0 : 1, LevelManager.SCORE_GOOD, false);
     }
 
     public virtual void PerfectHit()
@@ -83,7 +83,7 @@ public class NoteBlock : MonoBehaviour
         StopCoroutine(activeCoroutine);
         StartCoroutine(FadeCoroutine(FADE_DURATION, sRenderer));
 
-        FindObjectOfType<LevelManager>().AddScore(day ? 0 : 1, LevelManager.SCORE_PERFECT);
+        FindObjectOfType<LevelManager>().AddScore(day ? 0 : 1, LevelManager.SCORE_PERFECT, false);
     }
 
     public virtual IEnumerator FadeCoroutine(float fadeDuration, SpriteRenderer sRenderer)

@@ -11,8 +11,8 @@ public class LevelManager : MonoBehaviour
     public const int COMBO_DIVIDER = 100;
     public const int SLIDER_MULTI = 2;
 
-    public const int COMBO_DIFFERENCE_NUM_1 = 3;
-    public const int COMBO_DIFFERENCE_NUM_2 = 10;
+    public const int COMBO_DIFFERENCE_NUM_1 = 20;
+    public const int COMBO_DIFFERENCE_NUM_2 = 50;
     public const float COMBO_DIFFERENCE_RATIO_1 = 1.5f;
     public const float COMBO_DIFFERENCE_RATIO_2 = 2.0f;
 
@@ -69,16 +69,16 @@ public class LevelManager : MonoBehaviour
     /// </summary>
     /// <param name="player"></param>
     /// <param name="score"></param>
-    public void AddScore(int player, int score)
+    public void AddScore(int player, int score, bool slider)
     {
         if (player == 0)
         {
-            dayScore += Mathf.RoundToInt(score + score * (((float)dayCombo) / COMBO_DIVIDER));
-            dayCombo++;
+            dayScore += Mathf.RoundToInt(score + score * (((float)dayCombo) / COMBO_DIVIDER)) * (slider ? SLIDER_MULTI : 1);
+            dayCombo += 1 + (slider ? 1 : 0);
             return;
         }
-        nightScore += Mathf.RoundToInt(score + score * (((float)nightCombo) / COMBO_DIVIDER));
-        nightCombo++;
+        nightScore += Mathf.RoundToInt(score + score * (((float)nightCombo) / COMBO_DIVIDER)) * (slider ? SLIDER_MULTI : 1);
+        nightCombo += 1 + (slider ? 1 : 0);
     }
 
     /// <summary>
