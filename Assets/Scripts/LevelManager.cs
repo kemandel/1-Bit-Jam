@@ -21,7 +21,7 @@ public class LevelManager : MonoBehaviour
 
     public const float LINE_MOVE_TIME = 1f;
 
-    public bool moveMouse = false;
+    public bool moveMouse = true;
 
     public Text DayScoreText;
     public Text NightScoreText;
@@ -62,15 +62,27 @@ public class LevelManager : MonoBehaviour
             lineX = Input.mousePosition.x / Screen.width;
         }
 
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            GetComponent<SongPlayer>().PlaySong((BeatMap)Resources.Load("Beatmaps/EnterTheLair"));
-        }
-
         DayScoreText.text = $"Score: {dayScore:D6}";
         DayComboText.text = $"Combo: {dayCombo}x";
         NightScoreText.text = $"Score: {nightScore:D6}";
         NightComboText.text = $"Combo: {nightCombo}x";
+    }
+
+    /// <summary>
+    /// Starts the selected song on the chosen mode
+    /// </summary>
+    public void StartSong(bool twoPlayer, BeatMap map)
+    {
+        dayScore = nightScore = dayCombo = nightCombo = 0;
+        moveMouse = false;
+        GetComponent<SongPlayer>().PlaySong(map);
+        lineX = .5f;
+    }
+
+    public void EndSong()
+    {
+        FindObjectOfType<MainMenuUI>().RestartUI();
+        FindObjectOfType<MainMenuUI>().gameCanvas.gameObject.SetActive(false);
     }
 
     /// <summary>
@@ -127,19 +139,23 @@ public class LevelManager : MonoBehaviour
     {
         missSign.GetComponent<Animator>().SetBool("ShowMiss", true);
         SpriteRenderer sRenderer = missSign.GetComponent<SpriteRenderer>();
+        SpriteRenderer sRenderer2 = missSign.GetComponentsInChildren<SpriteRenderer>()[1];
         yield return new WaitForSeconds(MISS_DURATION);
         float startTime = Time.time;
         Color originalColor = sRenderer.color;
-        while(sRenderer.color.a > 0)
+        Color originalColor2 = sRenderer2.color;
+        while(sRenderer.color.a > 0 && sRenderer2.color.a > 0)
         {
             float passedTime = Time.time - startTime;
             float ratio = passedTime / fadeDuration;
             float newAlpha = Mathf.Lerp(1, 0, ratio);
             sRenderer.color = new Color(sRenderer.color.r, sRenderer.color.g, sRenderer.color.b, newAlpha);
+            sRenderer2.color = new Color(sRenderer2.color.r, sRenderer2.color.g, sRenderer2.color.b, newAlpha);
             yield return null;
         }
         missSign.GetComponent<Animator>().SetBool("ShowMiss", false);
         sRenderer.color = originalColor;
+        sRenderer2.color = originalColor2;
     }
 
     public void CheckLine()

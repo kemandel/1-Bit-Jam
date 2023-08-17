@@ -7,6 +7,7 @@ public class SongPlayer : MonoBehaviour
     public const float SPAWN_SPACE = 1.1875f;
     public const float NOTE_HEIGHT = 8.6875f;
     public const float SONG_LOAD_TIME = 1f;
+    public const float SONG_END_TIME = 2f;
 
     private float songTime;
     private bool songPlaying = false;
@@ -36,6 +37,13 @@ public class SongPlayer : MonoBehaviour
             }
             yield return null;
         }
+
+        while (songPlaying)
+        {
+            yield return null;
+        }
+        yield return new WaitForSeconds(SONG_END_TIME + map.fallTime);
+        FindObjectOfType<LevelManager>().EndSong();
     }
 
     private IEnumerator PlaySongCoroutine(float delay, AudioClip song)

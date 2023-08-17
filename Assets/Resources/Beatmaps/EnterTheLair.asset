@@ -12,6 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b060253348b1834b8b04ee549e4bfd7, type: 3}
   m_Name: EnterTheLair
   m_EditorClassIdentifier: 
+  songName: Enter the Lair
+  song: {fileID: 8300000, guid: 44727246b9551844aa88d6f7b962e904, type: 3}
   fallTime: 3
   beatmap:
   - LineCheck: 0
@@ -1159,4 +1161,3 @@ MonoBehaviour:
     sliderDuration: 3
     position: 7
     time: 133.5
-  song: {fileID: 8300000, guid: 44727246b9551844aa88d6f7b962e904, type: 3}

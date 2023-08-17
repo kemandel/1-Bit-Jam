@@ -5,9 +5,10 @@ using UnityEngine;
 [CreateAssetMenu]
 public class BeatMap : ScriptableObject
 {
+    public string songName;
+    public AudioClip song;
     public float fallTime;
     public Note[] beatmap;
-    public AudioClip song;
 }
 
 [System.Serializable]
