@@ -4,6 +4,7 @@ using System.Threading;
 using JetBrains.Annotations;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class InputBlock : MonoBehaviour
 {
@@ -16,6 +17,7 @@ public class InputBlock : MonoBehaviour
     public bool day;
     public KeyCode DayInput;
     public KeyCode NightInput;
+    public Text controlUI;
 
     public List<NoteBlock> currentNotes = new List<NoteBlock>();
     [HideInInspector]
@@ -30,6 +32,9 @@ public class InputBlock : MonoBehaviour
         }
 
         KeyCode code = day ? DayInput : NightInput;
+
+        UpdateUI(code);
+
         if (currentNotes.Count > 0)
         {
             float distance = Vector2.Distance(transform.position, currentNotes[0].transform.position);
@@ -95,6 +100,12 @@ public class InputBlock : MonoBehaviour
             }
             else if (currentNotes.Count > 0) sliding = false;
         }
+    }
+
+    private void UpdateUI(KeyCode code)
+    {
+        string s = code.ToString();
+        controlUI.text = s[^1].ToString();
     }
 
     private void OnTriggerEnter2D(Collider2D other)

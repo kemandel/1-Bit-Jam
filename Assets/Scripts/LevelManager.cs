@@ -49,6 +49,8 @@ public class LevelManager : MonoBehaviour
 
     public Transform hitBar;
 
+    public AudioClip menuTheme;
+
     private float lineX;
 
     private void Awake()
@@ -77,6 +79,7 @@ public class LevelManager : MonoBehaviour
     {
         dayScore = nightScore = dayCombo = nightCombo = 0;
         moveMouse = false;
+        Cursor.visible = false;
         GetComponent<SongPlayer>().PlaySong(map);
         lineX = .5f;
     }
@@ -86,7 +89,13 @@ public class LevelManager : MonoBehaviour
         gameOverText.gameObject.SetActive(true);
         string text = dayScore > nightScore ? "Player 1" : "Player 2";
         gameOverText.text = text + " Wins!";
+        lineX = dayScore > nightScore ? 1f : 0;
         yield return new WaitForSeconds(delay);
+        moveMouse = true;
+        Cursor.visible = true;
+        GetComponent<AudioSource>().clip = menuTheme;
+        GetComponent<AudioSource>().loop = true;
+        GetComponent<AudioSource>().Play();
         FindObjectOfType<MainMenuUI>().RestartUI();
         FindObjectOfType<MainMenuUI>().gameCanvas.gameObject.SetActive(false);
     }

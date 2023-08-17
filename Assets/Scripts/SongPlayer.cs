@@ -11,6 +11,11 @@ public class SongPlayer : MonoBehaviour
 
     private float songTime;
     private bool songPlaying = false;
+    private float startVolume;
+
+    private void Start() {
+        startVolume = GetComponent<AudioSource>().volume;
+    }
 
     public void PlaySong(BeatMap map)
     {
@@ -48,10 +53,13 @@ public class SongPlayer : MonoBehaviour
 
     private IEnumerator PlaySongCoroutine(float delay, AudioClip song)
     {
-        yield return new WaitForSeconds(SONG_LOAD_TIME);
         AudioSource audio = GetComponent<AudioSource>();
+        StartCoroutine(FadeAudioCoroutine(audio, SONG_LOAD_TIME));
+        yield return new WaitForSeconds(SONG_LOAD_TIME);
         audio.clip = song;
         audio.PlayScheduled(AudioSettings.dspTime + delay);
+        audio.volume = startVolume;
+        audio.loop = false;
         songPlaying = true;
 
         float startTime = Time.time;
@@ -72,6 +80,20 @@ public class SongPlayer : MonoBehaviour
         songPlaying = false;
     }
 
+    private IEnumerator FadeAudioCoroutine(AudioSource audio, float delay)
+    {
+        float startTime = Time.time;
+        float currentTime = 0;
+
+        while (currentTime < delay)
+        {
+            yield return null;
+            currentTime = Time.time - startTime;
+            float ratio = currentTime / delay;
+            audio.volume = Mathf.Lerp(startVolume, 0, ratio);
+        }
+    }
+
     private IEnumerator CheckLineCoroutine(float fallTime)
     {
         yield return new WaitForSeconds(fallTime + fallTime / 12);
@@ -80,7 +102,7 @@ public class SongPlayer : MonoBehaviour
 
     private void SpawnNote(Note note, float fallTime)
     {
-        Debug.Log("Desync: " + Mathf.Abs(FindObjectOfType<AudioSource>().time - note.time + fallTime));
+        //Debug.Log("Desync: " + Mathf.Abs(FindObjectOfType<AudioSource>().time - note.time + fallTime));
         Vector3 startingPosition = new Vector3(SPAWN_SPACE * note.position - SPAWN_SPACE * (4 - .5f), NOTE_HEIGHT);
 
         if (note.slider)
