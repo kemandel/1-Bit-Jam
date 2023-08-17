@@ -42,8 +42,8 @@ public class SongPlayer : MonoBehaviour
         {
             yield return null;
         }
-        yield return new WaitForSeconds(SONG_END_TIME + map.fallTime);
-        FindObjectOfType<LevelManager>().EndSong();
+
+        StartCoroutine(FindObjectOfType<LevelManager>().EndSongCoroutine(SONG_END_TIME + map.fallTime));
     }
 
     private IEnumerator PlaySongCoroutine(float delay, AudioClip song)

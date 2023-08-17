@@ -159,6 +159,7 @@ MonoBehaviour:
   NightScoreText: {fileID: 2048146491}
   DayComboText: {fileID: 1393292276}
   NightComboText: {fileID: 1032417362}
+  gameOverText: {fileID: 260381833}
   DragonDay: {fileID: 73327826}
   DragonNight: {fileID: 534057041}
   MissDay: {fileID: 836093162}
@@ -607,7 +608,7 @@ GameObject:
   - component: {fileID: 126194247}
   - component: {fileID: 126194246}
   m_Layer: 5
-  m_Name: Text (Legacy)
+  m_Name: SongSelectionText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -740,6 +741,86 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6f7b83acf06af224090b7c61640b900e, type: 3}
+--- !u!1 &260381831
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 260381832}
+  - component: {fileID: 260381834}
+  - component: {fileID: 260381833}
+  m_Layer: 5
+  m_Name: GameOverText
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!224 &260381832
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 260381831}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.13514487, y: 0.13514487, z: 1.0001361}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 395920274}
+  m_RootOrder: 10
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0.000030517578, y: 176.13669}
+  m_SizeDelta: {x: 459.12, y: 414.69}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &260381833
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 260381831}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0.91372555, g: 0.91372555, b: 0.91372555, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_FontData:
+    m_Font: {fileID: 12800000, guid: 585188cdc4600544eb408bee749e4b3a, type: 3}
+    m_FontSize: 300
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 3
+    m_MaxSize: 300
+    m_Alignment: 4
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: 
+--- !u!222 &260381834
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 260381831}
+  m_CullTransparentMesh: 1
 --- !u!1 &267514383
 GameObject:
   m_ObjectHideFlags: 0
@@ -1086,6 +1167,7 @@ RectTransform:
   - {fileID: 86950476}
   - {fileID: 1987303025}
   - {fileID: 126194248}
+  - {fileID: 260381832}
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1120,6 +1202,7 @@ MonoBehaviour:
   helpInfograph: {fileID: 1987303026}
   creditsInfograph: {fileID: 0}
   selectSongText: {fileID: 126194246}
+  gameOverText: {fileID: 260381833}
 --- !u!1 &508865521
 GameObject:
   m_ObjectHideFlags: 0

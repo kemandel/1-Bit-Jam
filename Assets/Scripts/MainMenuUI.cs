@@ -23,6 +23,7 @@ public class MainMenuUI : MonoBehaviour
     public Image creditsInfograph;
 
     public Text selectSongText;
+    public Text gameOverText;
 
     private int currentScreen;
     private bool twoPlayer;
@@ -36,6 +37,7 @@ public class MainMenuUI : MonoBehaviour
     
     public void RestartUI()
     {
+        gameOverText.gameObject.SetActive(false);
         playButton.gameObject.SetActive(true);
         helpButton.gameObject.SetActive(true);
         creditsButton.gameObject.SetActive(true);

@@ -28,6 +28,8 @@ public class LevelManager : MonoBehaviour
     public Text DayComboText;
     public Text NightComboText;
 
+    public Text gameOverText;
+
     public GameObject DragonDay;
     public GameObject DragonNight;
 
@@ -79,8 +81,12 @@ public class LevelManager : MonoBehaviour
         lineX = .5f;
     }
 
-    public void EndSong()
+    public IEnumerator EndSongCoroutine(float delay)
     {
+        gameOverText.gameObject.SetActive(true);
+        string text = dayScore > nightScore ? "Player 1" : "Player 2";
+        gameOverText.text = text + " Wins!";
+        yield return new WaitForSeconds(delay);
         FindObjectOfType<MainMenuUI>().RestartUI();
         FindObjectOfType<MainMenuUI>().gameCanvas.gameObject.SetActive(false);
     }
