@@ -16,6 +16,9 @@ public class LevelManager : MonoBehaviour
     public const float COMBO_DIFFERENCE_RATIO_1 = 1.5f;
     public const float COMBO_DIFFERENCE_RATIO_2 = 2.0f;
 
+    public const int MISS_VALUE = 1;
+    public const float MISS_DURATION = .5f;
+
     public const float LINE_MOVE_TIME = 1f;
 
     public bool moveMouse = false;
@@ -24,6 +27,12 @@ public class LevelManager : MonoBehaviour
     public Text NightScoreText;
     public Text DayComboText;
     public Text NightComboText;
+
+    public GameObject DragonDay;
+    public GameObject DragonNight;
+
+    public GameObject MissDay;
+    public GameObject MissNight;
 
     public float LineX { get { return lineX; } }
 
@@ -89,10 +98,48 @@ public class LevelManager : MonoBehaviour
     {
         if (player == 0)
         {
+            if (dayCombo >= MISS_VALUE) StartCoroutine(MissAnim(MISS_DURATION, player));
             dayCombo = 0;
             return;
         }
+        if (nightCombo >= MISS_VALUE) StartCoroutine(MissAnim(MISS_DURATION, player));
         nightCombo = 0;
+    }
+
+    public IEnumerator MissAnim(float duration, int player)
+    {
+        if (player == 0)
+        {
+            StartCoroutine(MissAnimWord(MISS_DURATION * 2, MissDay));
+            DragonDay?.GetComponent<Animator>().SetBool("ShowMiss", true);
+            yield return new WaitForSeconds(duration);
+            DragonDay?.GetComponent<Animator>().SetBool("ShowMiss", false);
+            yield break;
+        }
+
+        StartCoroutine(MissAnimWord(MISS_DURATION * 2, MissNight));
+        DragonNight?.GetComponent<Animator>().SetBool("ShowMiss", true);
+        yield return new WaitForSeconds(duration);
+        DragonNight?.GetComponent<Animator>().SetBool("ShowMiss", false);
+    }
+
+    public IEnumerator MissAnimWord(float fadeDuration, GameObject missSign)
+    {
+        missSign.GetComponent<Animator>().SetBool("ShowMiss", true);
+        SpriteRenderer sRenderer = missSign.GetComponent<SpriteRenderer>();
+        yield return new WaitForSeconds(MISS_DURATION);
+        float startTime = Time.time;
+        Color originalColor = sRenderer.color;
+        while(sRenderer.color.a > 0)
+        {
+            float passedTime = Time.time - startTime;
+            float ratio = passedTime / fadeDuration;
+            float newAlpha = Mathf.Lerp(1, 0, ratio);
+            sRenderer.color = new Color(sRenderer.color.r, sRenderer.color.g, sRenderer.color.b, newAlpha);
+            yield return null;
+        }
+        missSign.GetComponent<Animator>().SetBool("ShowMiss", false);
+        sRenderer.color = originalColor;
     }
 
     public void CheckLine()

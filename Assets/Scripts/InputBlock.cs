@@ -66,7 +66,7 @@ public class InputBlock : MonoBehaviour
                 currentNotes.RemoveAt(0);
             }
 
-            if (sliding && currentNotes.Count > 0)
+            if (sliding && currentNotes.Count > 0 && currentNotes[0] is SliderBlock)
             {
                 distance = Mathf.Abs(Vector2.Distance(transform.position, ((SliderBlock)currentNotes[0]).EndPoint));
                 if (Input.GetKeyUp(code))
