@@ -66,7 +66,7 @@ public class InputBlock : MonoBehaviour
                 currentNotes.RemoveAt(0);
             }
 
-            if (sliding)
+            if (sliding && currentNotes.Count > 0)
             {
                 distance = Mathf.Abs(Vector2.Distance(transform.position, ((SliderBlock)currentNotes[0]).EndPoint));
                 if (Input.GetKeyUp(code))
@@ -93,10 +93,11 @@ public class InputBlock : MonoBehaviour
                     sliding = false;
                 }
             }
+            else if (currentNotes.Count > 0) sliding = false;
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D other) 
+    private void OnTriggerEnter2D(Collider2D other)
     {
         currentNotes.Add(other.GetComponent<NoteBlock>());
     }

@@ -6,33 +6,62 @@ public class SongPlayer : MonoBehaviour
 {
     public const float SPAWN_SPACE = 1.1875f;
     public const float NOTE_HEIGHT = 8.6875f;
+    public const float SONG_LOAD_TIME = 1f;
+
+    private float songTime;
+    private bool songPlaying = false;
 
     public void PlaySong(BeatMap map)
     {
-        StartCoroutine(SongCoroutine(map));
+        StartCoroutine(PlaySongCoroutine(map.fallTime, map.song));
+        StartCoroutine(PlayNoteCoroutine(map));
     }
 
-    private IEnumerator SongCoroutine(BeatMap map)
+    private IEnumerator PlayNoteCoroutine(BeatMap map)
     {
-        yield return new WaitForSeconds(1f);
-        AudioSource audio = GetComponent<AudioSource>();
-        audio.clip = map.song;
-        audio.PlayScheduled(AudioSettings.dspTime + map.fallTime - .125f);
         int i = 0;
         while (i < map.beatmap.Length)
         {
-            if (map.beatmap[i].LineCheck)
+            if (songPlaying && songTime >= map.beatmap[i].time - map.fallTime)
             {
-                if (!map.beatmap[i].slider)
-                    StartCoroutine(CheckLineCoroutine(map.fallTime));
-                else
-                    StartCoroutine(CheckLineCoroutine(map.fallTime + map.beatmap[i].sliderDuration));
+                if (map.beatmap[i].LineCheck)
+                {
+                    if (!map.beatmap[i].slider)
+                        StartCoroutine(CheckLineCoroutine(map.fallTime));
+                    else
+                        StartCoroutine(CheckLineCoroutine(map.fallTime + map.beatmap[i].sliderDuration));
+                }
+                SpawnNote(map.beatmap[i], map.fallTime);
+                i++;
             }
-            SpawnNote(map.beatmap[i], map.fallTime);
-            if (i + 1 < map.beatmap.Length)
-                yield return new WaitForSeconds(map.beatmap[i+1].time - map.beatmap[i].time);
-            i++;
+            yield return null;
         }
+    }
+
+    private IEnumerator PlaySongCoroutine(float delay, AudioClip song)
+    {
+        yield return new WaitForSeconds(SONG_LOAD_TIME);
+        AudioSource audio = GetComponent<AudioSource>();
+        audio.clip = song;
+        audio.PlayScheduled(AudioSettings.dspTime + delay);
+        songPlaying = true;
+
+        float startTime = Time.time;
+        float currentTime = 0;
+
+        while (currentTime < delay)
+        {
+            songTime = currentTime - delay;
+            yield return null;
+            currentTime = Time.time - startTime;
+        }
+
+        while (audio.isPlaying)
+        {
+            songTime = audio.time;
+            yield return null;
+        }
+        songPlaying = false;
     }
 
     private IEnumerator CheckLineCoroutine(float fallTime)
