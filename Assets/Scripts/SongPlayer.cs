@@ -19,7 +19,7 @@ public class SongPlayer : MonoBehaviour
 
     public void PlaySong(BeatMap map)
     {
-        StartCoroutine(PlaySongCoroutine(map.fallTime, map.song));
+        StartCoroutine(PlaySongCoroutine(map.fallTime, map));
         StartCoroutine(PlayNoteCoroutine(map));
     }
 
@@ -51,14 +51,14 @@ public class SongPlayer : MonoBehaviour
         StartCoroutine(FindObjectOfType<LevelManager>().EndSongCoroutine(SONG_END_TIME + map.fallTime));
     }
 
-    private IEnumerator PlaySongCoroutine(float delay, AudioClip song)
+    private IEnumerator PlaySongCoroutine(float delay, BeatMap map)
     {
         AudioSource audio = GetComponent<AudioSource>();
         StartCoroutine(FadeAudioCoroutine(audio, SONG_LOAD_TIME));
         yield return new WaitForSeconds(SONG_LOAD_TIME);
-        audio.clip = song;
+        audio.clip = map.song;
         audio.PlayScheduled(AudioSettings.dspTime + delay);
-        audio.volume = startVolume;
+        audio.volume = map.songVolume;
         audio.loop = false;
         songPlaying = true;
 

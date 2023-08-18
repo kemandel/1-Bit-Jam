@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   songName: Enter the Lair
   song: {fileID: 8300000, guid: 44727246b9551844aa88d6f7b962e904, type: 3}
+  songVolume: 1
   fallTime: 3
   beatmap:
   - LineCheck: 0

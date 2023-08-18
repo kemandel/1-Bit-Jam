@@ -234,6 +234,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 69c469ccebe25e243996a6dde47d6142, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  botAccuracy: 0.4
+  botHitChance: 0.97
   moveMouse: 1
   DayScoreText: {fileID: 1302760364}
   NightScoreText: {fileID: 2048146491}
@@ -4674,7 +4676,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Build a combo to take control over your opponents notes!
+  m_Text: Build a combo to take control over your opponent's notes!
 --- !u!222 &1680510199
 CanvasRenderer:
   m_ObjectHideFlags: 0
