@@ -32,7 +32,7 @@ public class MainMenuUI : MonoBehaviour
     {
         gameCanvas.gameObject.SetActive(false);
         if (song1 != null) song1Button.GetComponentInChildren<Text>().text = song1.songName;
-        if (song2 != null) song1Button.GetComponentInChildren<Text>().text = song2.songName;
+        if (song2 != null) song2Button.GetComponentInChildren<Text>().text = song2.songName;
     }
     
     public void RestartUI()

@@ -1500,6 +1500,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   colorA: {r: 0.08235294, g: 0.06666667, b: 0.18431373, a: 1}
   colorB: {r: 0.91372555, g: 0.91372555, b: 0.91372555, a: 1}
+  shader: {fileID: 4800000, guid: b3484e7b8d62ff5499fec8987c151077, type: 3}
 --- !u!1 &534057041
 GameObject:
   m_ObjectHideFlags: 0
