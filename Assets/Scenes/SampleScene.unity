@@ -1287,7 +1287,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   song1: {fileID: 11400000, guid: 764414a5377ec05458b5381e21bc4408, type: 2}
-  song2: {fileID: 0}
+  song2: {fileID: 11400000, guid: e4da50fb6f21915479d0378784019251, type: 2}
   gameCanvas: {fileID: 374161629}
   playButton: {fileID: 1035715977}
   helpButton: {fileID: 848132464}
