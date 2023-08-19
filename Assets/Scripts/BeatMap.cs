@@ -7,6 +7,7 @@ public class BeatMap : ScriptableObject
 {
     public string songName;
     public AudioClip song;
+    public float songVolume;
     public float fallTime;
     public Note[] beatmap;
 }

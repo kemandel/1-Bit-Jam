@@ -21,6 +21,9 @@ public class LevelManager : MonoBehaviour
 
     public const float LINE_MOVE_TIME = 1f;
 
+    public float botAccuracy;
+    public float botHitChance;
+
     public bool moveMouse = true;
 
     public Text DayScoreText;
@@ -77,6 +80,23 @@ public class LevelManager : MonoBehaviour
     /// </summary>
     public void StartSong(bool twoPlayer, BeatMap map)
     {
+        if (!twoPlayer)
+        {
+            foreach (InputBlock n in FindObjectsOfType<InputBlock>())
+            {
+                n.botAccuracy = botAccuracy;
+                n.botHitChance = botHitChance;
+                n.botControlled = true;
+            }
+        }
+        else
+        {
+            foreach (InputBlock n in FindObjectsOfType<InputBlock>())
+            {
+                n.botControlled = false;
+            }
+        }
+
         dayScore = nightScore = dayCombo = nightCombo = 0;
         moveMouse = false;
         Cursor.visible = false;
@@ -89,13 +109,14 @@ public class LevelManager : MonoBehaviour
         gameOverText.gameObject.SetActive(true);
         string text = dayScore > nightScore ? "Player 1" : "Player 2";
         gameOverText.text = text + " Wins!";
-        lineX = dayScore > nightScore ? 1f : 0;
+        StartCoroutine(MoveLineCoroutine(dayScore > nightScore ? 1f : 0, LINE_MOVE_TIME * 2));
         yield return new WaitForSeconds(delay);
         moveMouse = true;
         Cursor.visible = true;
         GetComponent<AudioSource>().clip = menuTheme;
         GetComponent<AudioSource>().loop = true;
         GetComponent<AudioSource>().Play();
+        GetComponent<AudioSource>().volume = 1;
         FindObjectOfType<MainMenuUI>().RestartUI();
         FindObjectOfType<MainMenuUI>().gameCanvas.gameObject.SetActive(false);
     }
