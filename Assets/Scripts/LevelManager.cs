@@ -11,8 +11,8 @@ public class LevelManager : MonoBehaviour
     public const int COMBO_DIVIDER = 100;
     public const int SLIDER_MULTI = 2;
 
-    public const int COMBO_DIFFERENCE_NUM_1 = 20;
-    public const int COMBO_DIFFERENCE_NUM_2 = 50;
+    public const int COMBO_DIFFERENCE_NUM_1 = 10;
+    public const int COMBO_DIFFERENCE_NUM_2 = 30;
     public const float COMBO_DIFFERENCE_RATIO_1 = 1.5f;
     public const float COMBO_DIFFERENCE_RATIO_2 = 2.0f;
 

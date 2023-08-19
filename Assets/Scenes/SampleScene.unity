@@ -1998,7 +1998,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0.00018310547, y: -28.877121}
+  m_AnchoredPosition: {x: 0.00018310547, y: -36.883335}
   m_SizeDelta: {x: 2120.903, y: 1370.78}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &680603406
@@ -2034,8 +2034,8 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "Programming: \nMaximillian Mandel\nGame Art: \nColby Sembrat\nMusic:\nMaximillian
-    Mandel\nAnabelle Mandel\nItch Art:\ndoodlerush"
+  m_Text: "Programming: \nMaximillian Mandel\nArt: \nColby Sembrat\nMusic:\nMaximillian
+    Mandel\nAnabelle Mandel"
 --- !u!222 &680603407
 CanvasRenderer:
   m_ObjectHideFlags: 0

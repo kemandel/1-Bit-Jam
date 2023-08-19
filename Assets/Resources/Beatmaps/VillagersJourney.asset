@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   songName: Villagers Journey
   song: {fileID: 8300000, guid: 225e6f1e39b48724eac1dc0f5b694344, type: 3}
-  songVolume: 0.25
+  songVolume: 0.1
   fallTime: 3
   beatmap:
   - LineCheck: 0
@@ -1082,27 +1082,27 @@ MonoBehaviour:
     sliderDuration: 0
     position: 2
     time: 99
-  - LineCheck: 1
+  - LineCheck: 0
     slider: 0
     sliderDuration: 0
     position: 3
     time: 99.5
-  - LineCheck: 1
+  - LineCheck: 0
     slider: 1
     sliderDuration: 2
     position: 2
     time: 100
-  - LineCheck: 1
+  - LineCheck: 0
     slider: 1
     sliderDuration: 2
     position: 0
     time: 100
-  - LineCheck: 1
+  - LineCheck: 0
     slider: 1
     sliderDuration: 2
     position: 6
     time: 100
-  - LineCheck: 1
+  - LineCheck: 0
     slider: 1
     sliderDuration: 2
     position: 4
